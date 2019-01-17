@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.pixelmedia"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+<!-- versionCode is optional and Android only -->
+
+  <name>Extranet</name>
+
+  <description>
+      Prueba
+  </description>
+
+  <author href="https://www.pixelmedia.com.pa" email="webmaster@pixelmedia.com.pa">
+      Pixel Media Publicidad
+  </author>
+
+</widget>
