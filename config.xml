@@ -16,5 +16,9 @@
   <author href="https://www.pixelmedia.com.pa" email="webmaster@pixelmedia.com.pa">
       Pixel Media Publicidad
   </author>
+  <plugin name="cordova-plugin-appversion" spec="~1" source="npm" />
+  <plugin name="cordova-plugin-crosswalk-webview" spec="~2" source="npm" />
+  <plugin name="cordova-plugin-network-information" spec="~2" source="npm" />
+  <plugin name="cordova-plugin-whitelist" spec="~1" source="npm" />
 
 </widget>
