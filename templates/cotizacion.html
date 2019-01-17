@@ -1,0 +1,94 @@
+<div ng-controller="verCotizacionController" id="verCotizacionController" class="h100">
+	<h1>Ver Cotización</h1>
+    <div class="con_scroll">
+    	<div class="contenedor_interno">
+            <uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+            <div class="loading" ng-show="cotLoading"><img src="images/loading.gif"><br>Cargando Cotización</div>
+                <div>
+                	<div class="info_cotizacion">
+                    	<div class="info_cotizacion_in">
+                            <div class="emails" ng-show="cotizacion.emails_recorrido.length > 0">
+                                <div class="tit">Emails de Recorrido</div>
+                                <div  ng-repeat="email_rec in cotizacion.emails_recorrido">{{email_rec}}</div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">N°</div>
+                                <div class="valor">{{cotizacion.id}}</div>
+                            </div>
+                            <div class="item" ng-show="cotizacion.nombre != ''">
+                                <div class="tit">Nombre</div>
+                                <div class="valor">{{cotizacion.nombre}}</div>
+                            </div>
+                            <div class="item" ng-show="cotizacion.cliente.nombre != null">
+                                <div class="tit">Cliente / Prospecto</div>
+                                <div class="valor">{{cotizacion.cliente.nombre}} {{cotizacion.cliente.apellidos}}</div>
+                            </div>
+                            <div class="item" ng-show="cotizacion.cliente.email != null">
+                                <div class="tit">e-mail</div>
+                                <div class="valor">{{cotizacion.cliente.email}}</div>
+                            </div>
+                            <div class="item" ng-show="cotizacion.cliente.telefono != null">
+                                <div class="tit">Teléfono</div>
+                                <div class="valor">{{cotizacion.cliente.telefono}}</div>
+                            </div>
+                            <div class="item" ng-show="cotizacion.cliente.celular != null">
+                                <div class="tit">Celular</div>
+                                <div class="valor">{{cotizacion.cliente.celular}}</div>
+                            </div>
+                            <div class="item" ng-show="cotizacion.cliente.comentarios != null">
+                                <div class="tit">Comentarios</div>
+                                <div class="valor">{{cotizacion.cliente.comentarios}}</div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">Fecha</div>
+                                <div class="valor">{{cotizacion.fecha}}</div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">Status</div>
+                                <div class="valor">{{cotizacion.status}}</div>
+                            </div>
+                     	</div>
+                        <div class="btn-group acciones" role="group">
+                            <button class="btn btn-default" ng-click="mostrarEmail=!mostrarEmail"><span class="glyphicon glyphicon-envelope"></span> Enviar por e-mail</button>
+                            <button class="btn btn-info" ng-click="copiarACarrito()"><span class="glyphicon glyphicon-pencil"></span> Copiar Cotización a Carrito Nuevo</button>
+                        </div>
+                        <form ng-submit="enviarCarrito(carritoEmail, carritoEmail2, carritoEmail3, carritoComentarios)" class="form-inline form-guardar-carrito" ng-show="mostrarEmail">
+                                Enviar por e-mail: <div class="form-group"><input type="email" required name="carritoEmail" placeholder="e-mail" ng-model="carritoEmail" class="form-control"><div class="loading-email" ng-show="emailLoading"><span class="fa fa-spinner fa-spin"></span></div></div>
+                                <div class="form-group"><input type="email" name="carritoEmail2" placeholder="e-mail" ng-model="carritoEmail2" class="form-control"><div class="loading-email" ng-show="emailLoading2"><span class="fa fa-spinner fa-spin"></span></div></div>
+                                <div class="form-group"><input type="email" name="carritoEmail3" placeholder="e-mail" ng-model="carritoEmail3" class="form-control"><div class="loading-email" ng-show="emailLoading3"><span class="fa fa-spinner fa-spin"></span></div></div>
+                                <textarea placeholder="Comentarios" name="carritoComentarios" ng-model="carritoComentarios" class="form-control"></textarea>
+                                <button type="submit" class="btn btn-info">Enviar</button> 
+                    
+                    </form>
+                
+            </div>
+                    <table  ng-if="cotizacion.lineas.length > 0"  class="tabla_carrito">
+                        <tr>
+                            <th>Cant</th>
+                            <th>Item</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr ng-repeat="linea in cotizacion.lineas">
+                            <td>{{linea.cant}}</td>
+                            <td class="nombre_producto">{{linea.producto.nombre}}<img ng-src="{{img_url}}th_{{linea.producto.imagen}}" class="img-responsive" ng-if="linea.producto.imagen != ''"></td>
+                            <td>{{linea.precio | currency}}</td>
+                            <td>{{(linea.precio * linea.cant) | currency}}</td>
+                        </tr>
+                        <tr class="totales">
+                            <td colspan="3">Sub Total</td>
+                            <td>{{cotizacion.total | currency}}</td>
+                        </tr>
+                        <tr class="totales">
+                            <td colspan="3">ITBMS</td>
+                            <td>{{cotizacion.total * 0.07 | currency}}</td>
+                        </tr>
+                        <tr class="totales">
+                            <td colspan="3">Total</td>
+                            <td>{{cotizacion.total * 1.07 | currency}}</td>
+                        </tr>
+                    </table>
+             	</div>           
+        </div>
+    </div>
+</div>

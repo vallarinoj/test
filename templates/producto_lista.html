@@ -1,0 +1,10 @@
+<div class="productos_holder con_scroll">
+        <div class="productos" ng-repeat="producto in productos" ng-class="esPrimeroFila($index)" data-producto-id="{{producto.id}}" ng-click="verProducto(producto.id)">
+            <div class="img">
+                <a href="#"><img ng-src="{{producto.imagenes.th}}" class="img-responsive" ng-if="producto.imagenes.th != ''"></a>
+            </div>
+            <div class="prod_name">
+                <a href="#">{{producto.nombre}}<span class="disp" ng-if="producto.existencias != ''">{{producto.existencias}} Disponibles</span></a>
+            </div>
+        </div>
+    </div>

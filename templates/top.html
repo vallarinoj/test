@@ -1,0 +1,17 @@
+<div id="topContainer"  ng-controller="topController" class="clearfix">
+	<div class="btn-group" role="group" id="botonera">
+
+        <button type="button" class="btn" ng-click="goBack()"><span class="glyphicon glyphicon-triangle-left"></span></button>
+        <button type="button" class="btn" ng-click="goForward()"><span class="glyphicon glyphicon-triangle-right"></span></button>
+        <button type="button" class="btn" ng-class="recorridoClass" id="recorrido" data-status="off" ng-click="toggleRecorrido()"><span class="glyphicon" ng-class="recorridoBtnClass"></span>
+        	<span>{{recorridoText}}</span><span class="texto_tiempo" ng-show="mins>0 || segs > 0"> - {{mins}}:{{segsShow}}</span></button>
+       	<button type="button" class="btn" ng-click="verEncuesta()" ng-class="$root.globals.hizoEncuesta ? 'btn-success' : 'btn-warning'"><span class="glyphicon glyphicon-th-list"></span></button>
+        <button type="button" class="btn btn-default" ng-click="verCotizaciones()"><span class="glyphicon glyphicon-search"></span></button>
+        <button type="button" class="btn btn-default" ng-click="carrito()"><span class="glyphicon glyphicon-shopping-cart"></span><span class="contenido"></span></button>
+
+        <button type="button" class="btn btn-default" ng-click="mensajes()"><span class="glyphicon glyphicon-envelope"></span><span class="badge" ng-show="msgCount > 0">{{msgCount}}</span></button>
+        <button type="button" class="btn btn-default name" ng-click="config()">{{userName}} <span class="glyphicon glyphicon-cog"></span></button>
+        <button type="button" class="btn btn-default" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span></button>
+        <button type="button" class="btn active" id="online" ng-class="online_color_class"><span class="glyphicon" ng-class="online_icon_class"></span></button>
+    </div>
+</div>

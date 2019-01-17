@@ -1,0 +1,7 @@
+<div ng-controller="CatController" id="catController" class="h100">
+	<h1>{{catName}}</h1>
+    <ng-include src="'templates/producto_lista.html'"></ng-include>
+    <div class="paginas" ng-show="cant_paginas > 1">
+		<uib-pagination total-items="cant_paginas" max-size="10" ng-model="page" class="pagination-sm" items-per-page="1" previous-text="&lsaquo;" next-text="&rsaquo;" num-pages="numPages"></uib-pagination>
+    </div>
+</div>

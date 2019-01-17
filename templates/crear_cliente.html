@@ -1,0 +1,44 @@
+<h2>Crear Cliente</h2>
+                    <form ng-submit="submitCrearCliente()" class="crearClienteForm">
+                     	<div class="input-group">
+                        	<label for="webNombre" class="control-label">Nombre</label>
+                            <input name="webNombre" placeholder="Nombre" class="form-control"  type="text" ng-model="web.Nombre" autocomplete="off" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Contacto</label>
+                            <input name="webContacto" placeholder="Nombre de Contacto" class="form-control"  type="text" ng-model="web.Contacto" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                        	<label for="webCedula">Cédula / RUC</label>
+                            <input name="webCedula" placeholder="Cédula / RUC" class="form-control"  type="text" ng-model="web.Cedula" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                        	<label>Dirección</label>
+                            <input name="webDireccion1" placeholder="Dirección 1" class="form-control"  type="text" ng-model="web.Direccion1" autocomplete="off">
+                        </div>
+                        <!--div class="input-group">
+                        	<label>Dirección 2</label>
+                            <input name="webDireccion2" placeholder="Dirección 2" class="form-control"  type="text" ng-model="web.Direccion2" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                        	<label>Dirección 3</label>
+                            <input name="webDireccion3" placeholder="Dirección 3" class="form-control"  type="text" ng-model="web.Direccion3" autocomplete="off">
+                        </div-->
+                        <div class="input-group">
+                        	<label>e-mail</label>
+                            <input name="webEmail" placeholder="e-mail" class="form-control"  type="email" ng-model="web.Email" autocomplete="off">
+                        </div>
+                        <!--div class="input-group">
+                        	<label for="webFechaCumple">Fecha de Cumpleaños</label>
+                            <input name="webFechaCumple" placeholder="Fecha de Cumpleaños" class="form-control"  type="date" ng-model="web.FechaCumple" autocomplete="off">
+                        </div-->
+                        <div class="input-group">
+                        	<label for="webTelefono">Teléfono</label>
+                            <input name="webTelefono" placeholder="Teléfono" class="form-control"  type="tel" ng-model="web.Telefono" pattern="[0-9-]{7,13}" autocomplete="off" required>
+                        </div>
+                        <!--div class="input-group">
+                        	<label for="webFax">Fax / Móvil</label>
+                            <input name="webFax" placeholder="Fax" class="form-control"  type="tel" ng-model="web.Fax" pattern="[0-9-]{7,13}" autocomplete="off">
+                        </div-->
+                        <input name="" type="submit" value="Guardar" class="btn btn-success">
+                	</form>

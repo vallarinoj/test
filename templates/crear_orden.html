@@ -1,0 +1,72 @@
+<div ng-controller="crearOrdenController" id="crearOrdenController" class="h100">
+	<h1>Enviar Cotización a BizSuite</h1>
+    <div class="con_scroll">
+    	<div class="contenedor_interno">
+            <uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+            <div ng-if="ordenWeb == 0">
+                <div ng-if="clienteSel.id == 0 && !crearCliente && webCliente.id == 0" >
+                    <form ng-submit="buquedaCliente(cliente)">
+                    <div class="input-group">
+                        <input name="cliente" placeholder="Cliente" class="form-control"  type="text" ng-model="cliente" autocomplete="off">
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                        </span>
+                    </div>
+                    </form>
+                    <button class="btn btn-default" id="clienteNuevo" ng-click="clienteNuevo()" ng-show="busquedaHecha && !crearCliente">Crear Cliente Nuevo</button>
+                    <div class="select_cliente" ng-if="!crearCliente">
+                    	<table width="50%">
+                            <tr ng-if="busquedaHecha">
+                                <th>Nombre Legal</th>
+                                <th>Nombre Comercial</th>
+                                <th>RUC</th>
+                            </tr>
+                            <tr ng-repeat="cliente in clientesBuscados" class="linea_cliente" ng-click="selCliente(cliente)">
+                                <td>{{cliente.nombre}}</td>
+                                <td>{{cliente.nombre_comercial}}</td>
+                                <td>{{cliente.ruc}}</td>
+                            </tr>
+	                        <tr ng-if="(clientesBuscados.length == 0 && busquedaHecha)"><td colspan="3">No hay clientes con esas características</td></tr>
+                        </table>
+                    </div>
+                </div>
+                 <div class="crearCliente" ng-show="crearCliente">
+                 <ng-include src="'templates/crear_cliente.html'"></ng-include>
+               	</div>
+                <div ng-if="clienteSel.id != 0 || webCliente.id != 0">
+                    <div class="cliente_sel" ng-if="clienteSel.id != 0">Cliente: {{clienteSel.nombre}} - {{clienteSel.ruc}}<span ng-show="clienteSel.nombre_comercial != ''"> - {{clienteSel.nombre_comercial}}</span></div>
+                    <div class="cliente_sel" ng-if="webCliente.id != 0">Cliente: {{webCliente.Nombre}} - {{webCliente.Cedula}}<span ng-show="webCliente.Contacto != ''"> - {{webCliente.Contacto}}</span></div>
+                    <table  ng-if="carritoLineas.length > 0"  class="tabla_carrito">
+                        <tr>
+                            <th>Cant</th>
+                            <th>Item</th>
+                            <th>Precio Unitario</th>
+                        </tr>
+                        <tr ng-repeat="linea in carritoLineas">
+                            <td>{{linea.cant}}</td>
+                            <td class="nombre_producto">{{linea.producto.nombre}}<img ng-src="{{img_url}}th_{{linea.producto.imagen}}" class="img-responsive" ng-if="linea.producto.imagen != ''"></td>
+                            <td>{{linea.precio | currency}}</td>
+                        </tr>
+                        <tr class="totales">
+                            <td colspan="2">Sub Total</td>
+                            <td>{{totalCarrito | currency}}</td>
+                        </tr>
+                        <tr class="totales">
+                            <td colspan="2">ITBMS</td>
+                            <td>{{totalCarrito * 0.07 | currency}}</td>
+                        </tr>
+                        <tr class="totales">
+                            <td colspan="2">Total</td>
+                            <td>{{totalCarrito * 1.07 | currency}}</td>
+                        </tr>
+                    </table>
+                    <button class="btn btn-success btn-proceder" ng-click="proceder()">Proceder</button>
+                </div>
+            </div>
+            <div class="ordenCreada" ng-if="ordenWeb != 0">
+                Cotización CREADA N° {{ordenWeb}}<br>
+                En BizSuite
+            </div>
+        </div>
+    </div>
+</div>

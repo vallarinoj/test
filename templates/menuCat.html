@@ -1,0 +1,26 @@
+<div ng-controller="MenuController">
+    <div id="slide_izquierda" class="slide" ng-class="menu_class">
+        <h2>Categorías</h2>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Buscar"  ng-model="searchTerm">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="buscar()"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div><!-- /input-group -->
+                <ul id="categorias">
+                    <li ng-repeat="cat in cats" uib-dropdown class="panel-heading" auto-close="disabled" ng-class="esSelected(cat.id)" ng-if="(cat.tiene_hijos == 1 || cat.tiene_productos == 1) && cat.hijo_de == 0 ">
+                        <a href="#"  ng-click="ver_cat(cat.id, cat.tiene_hijos, cat.tiene_productos)" uib-dropdown-toggle ng-class="{'dropdown-toggle':cat.tiene_hijos==1}" data-toggle="{{link.sub && 'dropdown' || ''}}"  ng-if="cat.tiene_hijos == 1 || cat.tiene_productos == 1">{{cat.nombre}}<b ng-show="cat.tiene_hijos == 1" class="caret"></b></a>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-if="cat.tiene_hijos == 1">
+                            <li class="panel-heading" ng-repeat="cat2 in cats | filter:{ hijo_de:cat.id }" ng-if="cat2.tiene_hijos == 1 || cat2.tiene_productos == 1"  ng-click="ver_cat(cat2.id, cat2.tiene_hijos, cat2.tiene_productos)" ng-class="esSelected(cat2.id)">
+                                <a href="#">{{cat2.nombre}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+        <div class="trigger">
+            <a href="#" ng-click="$root.toggle_menu_iz()"><span class="glyphicon" ng-class="trigger_class" aria-hidden="true"></span></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<title>Grupo Selecta - Extranet APP</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link rel="icon" type="image/png" href="images/icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+<meta charset="utf-8" />
+<script src="cordova.js"></script>
+<script src="cordova_plugins.js"></script>
+<script src="scripts/angular/angular.min.js"></script>
+<script src="scripts/angular/angular-route.min.js"></script>
+<script src="scripts/angular/angular-animate.min.js"></script>
+<script src="scripts/ui_bootstrap/ui-bootstrap.min.js"></script>
+<script src="scripts/mn-touch/mn-touch.js"></script>
+<script src="scripts/hammer/hammer.js"></script>
+<script src="scripts/svgpanview/svg-pan-zoom.min.js"></script>
+<script src="scripts/idbwrapper/idbstore.min.js"></script>
+<script src="js/system.js"></script>
+<script src="js/app.js"></script>
+<script src="js/db_service.js"></script>
+<script src="js/api.js"></script>
+<script src="js/controller_menu_cliente.js"></script>
+<script src="js/controller_login.js"></script>
+<script src="js/controller_cambiarpw.js"></script>
+<script src="js/controller_config.js"></script>
+<script src="js/controller_buscar.js"></script>
+<script src="js/controller_menu.js"></script>
+<script src="js/controller_main.js"></script>
+<script src="js/controller_top.js"></script>
+<script src="js/controller_carrito.js"></script>
+<script src="js/controller_fp.js"></script>
+<script src="js/controller_ambiente.js"></script>
+<script src="js/controller_cat.js"></script>
+<script src="js/controller_productos.js"></script>
+<script src="js/controller_crear_orden.js"></script>
+<script src="js/controller_recorrido_modal.js"></script>
+<script src="js/controller_carrito_modal.js"></script>
+<script src="js/controller_ver_cotizaciones.js"></script>
+<script src="js/controller_ver_cotizacion.js"></script>
+<script src="js/controller_mensajes.js"></script>
+<script src="js/controller_ver_mensaje.js"></script>
+<script src="js/controller_modal_encuesta.js"></script>
+<script src="js/run.js"></script>
+<script type="text/javascript">
+    angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+  </script>
+<meta http-equiv="Content-Security-Policy" />
+</head>
+
+<body ng-app="GSP">
+	<div id="main_container">
+        <eltop ng-show="$root.globals.logueado" class="clearfix"></eltop>
+        <menu-cat ng-show="$root.globals.logueado"></menu-cat>
+        <menu-cliente ng-show="$root.globals.logueado"></menu-cliente>
+        <div ng-show="$root.globals.loading" id="loading_principal"><img src="images/loading.gif"><br>Por favor espere</div>
+    	<div id="container_interno" ng-controller="ViewController" ng-class="menu_class">
+        	<div class="trigger"><a href="#" ng-click="$root.view_toggle_menu()"><span class="glyphicon" ng-class="trigger_class" aria-hidden="true"></span></a></div>
+    		<div ng-view class="h100"></div>
+            <div class="inner_loader" ng-show="$root.globals.inner_loader"><img src="images/loading.gif"></div>
+        </div>
+        <fp ng-show="$root.globals.logueado" class="fp_container"></fp>
+    </div>
+</body>
+</html>

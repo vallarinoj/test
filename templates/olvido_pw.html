@@ -1,0 +1,18 @@
+<div class="login_panel h100" ng-controller="olvidoPwController">
+	<h1>Olvidó su Contraseña</h1>
+  <div id="login_form">
+  	<img src="images/top.png" width="200" height="125" alt="Grupo Selecta" />
+     <form  ng-submit="olvidoPw(email)" ng-show="!success">
+            <div class="error">{{login_error}} </div>
+            Ingrese su email para recuperar su contraseña
+          <input type="email" class="form-control" placeholder="Escriba su email" name="email" ng-model="email"  required />
+          <br>
+    
+          <button type="submit"  class="btn btn-primary">Entrar</button><br>
+          
+      </form>
+      <div ng-show="success">
+      	Se le envió un correo con las instrucciones para resetear su contraseña
+      </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div ng-controller="ProdController" id="ProdController" class="h100">
+	<h1>{{producto.nombre}}</h1>
+    <div class="productos_descripcion clearfix con_scroll">
+    	<div class="col">
+        	<div class="img_holder"><img ng-src="{{producto.imagenes.img}}" class="img-responsive" ng-if="producto.imagenes.img != ''"></div>
+       	</div>
+        <div class="col">
+        	<div class="nombre">{{producto.nombre}}</div>
+            <div class="descripcion" ng-bind-html="producto.descripcion | nl2br"></div>
+            <div class="detalles">
+            <div class="dimensiones"><span>Dimensiones:</span><span ng-bind-html="producto.dimensiones | nl2br"></span></div>
+            <div class="referencia"><span>Código:</span><span>{{producto.codigo_magic}}</span></div>
+            <div class="marca"><span>Marca:</span><span>{{producto.marca}}</span></div>
+            </div>
+            <uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+            <div class="clearfix">
+                <div class="clearfix holder">
+                    <div class="precio">Precio: <span>{{producto.precio_base | currency}}</span></div>
+                    <button type="button" class="btn btn-info" ng-click="add_carrito(producto)" ><!--ng-class="{disabled:producto.disponible < 1}"-->
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Agregar
+                    </button>
+                </div>
+                <div class="inventario clearfix">
+                	<table>
+                    	<tr>
+                    		<th>Bodega</th>
+                            <th>Disponible</th>
+                            <th>Reservado</th>
+                            <!--th>D</th-->
+                        </tr>
+                        <tr ng-repeat="existencias in producto.existencias">
+                        	<td>{{existencias.nombre}}</td>
+                            <td>{{existencias.disp}}</td>
+                            <td>{{existencias.res}}</td>
+                            <!--td>{{existencias.e - existencias.r}}</td-->
+                        </tr>
+                        <tr ng-show="producto.exhibidos.length > 0">
+                        	<th colspan="4">Exhibido en</th>
+                        </tr>
+                        <tr ng-repeat="exhibido in producto.exhibidos">
+                        	<td colspan="4">{{exhibido}}</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="hermanos clearfix" ng-show="producto.Phermanos.length>0">
+            	<div class="tit">Productos Hermanos</div>
+                <div class="productos" ng-repeat="producto in producto.Phermanos" data-producto-id="{{producto.id}}" ng-click="verProducto(producto.id)">
+                    <div class="img">
+                        <a href="#"><img ng-src="{{img_url}}th_{{producto.imagen}}" class="img-responsive" ng-if="producto.imagen != ''"></a>
+                    </div>
+                    <div class="prod_name">
+                        <a href="#">{{producto.nombre}}</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="relacionados clearfix" ng-show="producto.Prelacionados.length>0">
+            	<div class="tit">Productos Relacionados</div>
+                <div class="productos" ng-repeat="producto in producto.Prelacionados" data-producto-id="{{producto.id}}" ng-click="verProducto(producto.id)">
+                    <div class="img">
+                        <a href="#"><img ng-src="{{img_url}}th_{{producto.imagen}}" class="img-responsive" ng-if="producto.imagen != ''"></a>
+                    </div>
+                    <div class="prod_name">
+                        <a href="#">{{producto.nombre}}</a>
+                    </div>
+                </div>
+
+            </div>
+      	</div>
+   	</div>
+</div>

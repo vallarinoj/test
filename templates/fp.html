@@ -1,0 +1,49 @@
+<div id="FPController" ng-controller="FPController">
+	<uib-alert ng-repeat="alert in globals.msgConn" dismiss-on-timeout="3000" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+    <div id="fp" class="clearfix">
+    	<div id="loading_fp" ng-show="fpLoading"><img src="images/loading.gif"><br>Cargando Floor Plan</div>
+        <div class="nombreFP">
+        	<div>
+                <span class="nombrecito">Sucursal: </span>
+                <span uib-dropdown on-toggle="toggled(open)">
+                  <a href id="sucursal-dropdown" uib-dropdown-toggle>
+                     {{sucursal_sel.nombre}} <span class="caret" ng-show="sucursales.length > 1"></span>
+                  </a>
+                  <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" ng-show="sucursales.length > 1">
+                    <li ng-repeat="sucursal_item in sucursales | filter: {id:'!'+sucursal_sel.id}">
+                      <!--a href="#" ng-click="selSucursal(sucursal_item.id)"-->{{sucursal_item.nombre}}<!--/a-->
+                    </li>
+                  </ul>
+                </span>
+            </div>
+            <div>
+            	<span class="nombrecito">Floor: </span>
+                <span uib-dropdown on-toggle="toggled(open)">
+                  <a href id="fp-dropdown" uib-dropdown-toggle>
+                     {{fp_sel.nombre}} <span class="caret" ng-show="sucursal_sel.floor_plans.length > 1"></span>
+                  </a>
+                  <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" ng-show="sucursal_sel.floor_plans.length > 1">
+                    <li ng-repeat="fp_item in sucursal_sel.floor_plans | filter: {id:'!'+fp_sel.id}">
+                      <a href="#" ng-click="selFP(fp_item.id)">{{fp_item.nombre}}</a>
+                    </li>
+                  </ul>
+                </span>
+            </div>
+        </div>
+        <div id="container">
+
+        	<svg version="1.1"  id="svg_fp" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1024 695" >
+            	<g  svg-main>
+					<g ng-repeat="ambiente in ambientes" class="ambiente"  mn-touch secure-tap="mostrarAmbiente(ambiente)"><svgelement></svgelement></g>
+				</g>
+            </svg>
+
+        </div>
+
+    <div class="leyenda clearfix">
+    	<div ng-repeat="tipo in tipoAmbiente track by $index" class="tipo" ng-if="tipo.nombre.length > 0"><span class="color" ng-style="{backgroundColor:tipo.color}"></span>{{tipo.nombre}}</div>
+    </div>
+    <div id="version">v. {{version}}</div>
+</div>
+
+</div>

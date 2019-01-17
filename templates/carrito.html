@@ -1,0 +1,79 @@
+<div ng-controller="carritoController" id="carritoController" class="h100">
+	<h1>Carrito</h1>
+    <div class="con_scroll">
+    <div class="contenedor_interno">
+    <uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+    <div class="btn-group acciones" role="group" ng-show="totalCarrito>0">
+    	<button class="btn btn-default" ng-click="mostrarGuardar=!mostrarGuardar"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+        <button class="btn btn-default" ng-click="mostrarEmail=!mostrarEmail"><span class="glyphicon glyphicon-envelope"></span></button>
+        <button ng-class="{disabled:(totalCarrito==0 || carritoLineas.length == 0)}" ng-click="facturar()" class="btn btn-success crear-orden">Enviar Cotización a BizSuite</button>
+    </div>
+    <form ng-submit="guardarCarrito(carritoNombre)" class="form-inline form-guardar-carrito" ng-show="mostrarGuardar">
+        	Guardar Carrito: <div class="form-group"><input type="text" required name="carritoNombre" placeholder="Nombre" ng-model="carritoNombre" class="form-control"></div> <button type="submit" class="btn btn-info">Guardar</button>
+
+    </form>
+    <form ng-submit="enviarCarrito(carritoEmail, carritoEmail2, carritoEmail3, carritoComentarios)" class="form-inline form-guardar-carrito" ng-show="mostrarEmail">
+        	Enviar por e-mail: <div class="form-group"><input type="email" required name="carritoEmail" placeholder="e-mail" ng-model="carritoEmail" class="form-control"><div class="loading-email" ng-show="emailLoading"><span class="fa fa-spinner fa-spin"></span></div></div>
+            <div class="form-group"><input type="email" name="carritoEmail2" placeholder="e-mail" ng-model="carritoEmail2" class="form-control"><div class="loading-email" ng-show="emailLoading2"><span class="fa fa-spinner fa-spin"></span></div></div>
+            <div class="form-group"><input type="email" name="carritoEmail3" placeholder="e-mail" ng-model="carritoEmail3" class="form-control"><div class="loading-email" ng-show="emailLoading3"><span class="fa fa-spinner fa-spin"></span></div></div>
+            <textarea placeholder="Comentarios" name="carritoComentarios" ng-model="carritoComentarios" class="form-control"></textarea>
+            <button type="submit" class="btn btn-info">Enviar</button>
+
+    </form>
+    <div class="lista_carritos"  ng-show="carritoLineas.length > 0 || carritosRecorrido.length > 0">
+    	<button class="btn btn-info btn-sm" ng-click="nuevoCarrito()" ng-show="carritoLineas.length > 0"><span class="glyphicon glyphicon-shopping-cart"></span> Crear otro carrito para este Recorrido</button>
+        <table width="100%" ng-show="carritosRecorrido.length > 0">
+        	<thead>
+                <tr>
+                    <th colspan="5">Otros carritos del Recorrido</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Cantidad de Productos</th>
+                    <th>Nombre</th>
+                    <th>Sub-total</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="lista_carrito_in" ng-repeat="carritoRecorrido in carritosRecorrido" ng-click="seleccionarCarritoLocal(carritoRecorrido.id)">
+                    <td><span class="glyphicon glyphicon-pencil"></span></td>
+                    <td>{{carritoRecorrido.cant_items}}</td>
+                    <td><span ng-show="carritoRecorrido.nombre != ''">{{carritoRecorrido.nombre}}</span></td>
+                    <td>{{carritoRecorrido.valor_total | currency}}</td>
+                    <td>{{(1+taxVal)* carritoRecorrido.valor_total | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <table  ng-if="carritoLineas.length > 0" class="tabla_carrito">
+    	<tr>
+        	<th>Cant</th>
+            <th></th>
+            <th>Item</th>
+            <th>Precio Unitario</th>
+        </tr>
+        <tr ng-repeat="linea in carritoLineas">
+        	<td>{{linea.cant}}<br><span class="disponible">Disp: {{linea.producto.existencias_bodega.e}}</span></td>
+            <td><button class="btn btn-default" ng-click="masLinea(linea)"><span class="glyphicon glyphicon-chevron-up"></span></button>
+            <button class="btn btn-default" ng-click="menosLinea(linea)"><span class="glyphicon glyphicon-chevron-down"></span></button></td>
+            <td class="nombre_producto">{{linea.producto.nombre}}<img ng-src="{{img_url}}th_{{linea.producto.imagen}}" class="img-responsive" ng-if="linea.producto.imagen != ''"></td>
+            <td>{{linea.precio | currency}}</td>
+        </tr>
+        <tr class="totales subtotal">
+        	<td colspan="3">Sub Total</td>
+        	<td>{{subtotalCarrito | currency}}</td>
+        </tr>
+        <tr class="totales subtotal">
+        	<td colspan="3">Impuesto</td>
+        	<td>{{taxCarrito | currency}}</td>
+        </tr>
+        <tr class="totales">
+        	<td colspan="3">Total</td>
+        	<td>{{totalCarrito | currency}}</td>
+        </tr>
+    </table>
+    <div class="no_resultados" ng-if="carritoLineas.length == 0">No hay productos en el carrito</div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div ng-controller="configController" id="configController" class="h100">
+	<h1>Configuración</h1>
+    <div class="con_scroll">
+    	<div class="contenedor_interno">
+            <uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+            <button class="btn btn-danger" ng-click="borrarDb()"><span class="glyphicon glyphicon-remove"></span> Borrar Base de Datos Completa</button><br><br>
+			<!--button class="btn btn-info" ng-click="cambiarPw()"><span class="glyphicon glyphicon-lock"></span> Modificar su Contraseña</button-->
+        </div>
+    </div>
+</div>

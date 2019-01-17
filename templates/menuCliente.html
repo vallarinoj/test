@@ -1,0 +1,72 @@
+<div ng-controller="MenuClienteController">
+	<div id="slide_derecha" class="slide" ng-class="menu_class">
+        <div class="trigger">
+		<a href="#" ng-click="$root.toggle_menu_der()"><span class="glyphicon" ng-class="trigger_class" aria-hidden="true"></span></a>
+  		</div>
+        <uib-tabset active="activeTab">
+            <a href="#" ng-click="$root.globals.menuClienteTab = 0" class="tab-titulo" ng-class="{'active':$root.globals.menuClienteTab == 0}"><h2>Cliente / Prospecto</h2></a>
+            <a href="#" ng-click="$root.globals.menuClienteTab = 1" class="tab-titulo" ng-class="{'active':$root.globals.menuClienteTab == 1}"><h2>Encuesta</h2></a>
+        <uib-tab index="0" active="$root.globals.menuClienteTab == 0">
+            <form ng-submit="guardarClienteLocal(cliente)">
+                <div class="form-group">
+                    <input type="text" name="nombre" placeholder="Nombres" class="form-control" ng-model="cliente.nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="apellidos" placeholder="Apellidos" class="form-control" ng-model="cliente.apellidos" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="e-mail" class="form-control" ng-model="cliente.email">
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="telefono" placeholder="Teléfono" class="form-control" ng-model="cliente.telefono">
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="telefono2" placeholder="Celular" class="form-control" ng-model="cliente.celular">
+                </div>
+                <div class="form-group">
+                    <textarea cols="7" name="comentarios" placeholder="Comentarios" class="form-control" ng-model="cliente.comentarios" rows="6"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-info" ng-click="limpiar()">Limpiar</button>
+            </form>
+        </uib-tab>
+        <uib-tab index="1" active="$root.globals.menuClienteTab == 1">
+            <form ng-submit="guardarEncuesta()" id="encuesta-tab">
+                <div class="form-group" ng-repeat="pregunta in encuestasPreguntas">
+                    <label for="pregunta_{{pregunta.id}}">{{pregunta.pregunta}}</label>
+                    <select name="pregunta_{{pregunta.id}}" class="form-control" ng-model="encuestasRespuestas[pregunta.id]" ng-options="k as v for (k,v) in pregunta.respuestas" ng-if="pregunta.tipo == 1">
+                    </select>
+                    <textarea name="pregunta_{{pregunta.id}}" class="form-control" ng-model="encuestasRespuestas[pregunta.id]" ng-if="pregunta.tipo == 2">
+                    </textarea>
+                </div>
+                <span class="tooltip-holder" tooltip-placement="top" uib-tooltip="Debe iniciar un recorrido" tooltip-enable="!encuestaActiva">
+                    <button type="submit" class="btn btn-success" ng-disabled="!encuestaActiva" >Guardar</button>&nbsp;
+                </span>
+            </form>
+        </uib-tab>
+      </uib-tabset>
+        <!--h2>Cliente / Prospecto</h2>
+        <form ng-submit="guardarClienteLocal(cliente)">
+        	<div class="form-group">
+                <input type="text" name="nombre" placeholder="Nombres" class="form-control" ng-model="cliente.nombre" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="apellidos" placeholder="Apellidos" class="form-control" ng-model="cliente.apellidos" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="e-mail" class="form-control" ng-model="cliente.email">
+            </div>
+            <div class="form-group">
+                <input type="tel" name="telefono" placeholder="Teléfono" class="form-control" ng-model="cliente.telefono">
+            </div>
+			<div class="form-group">
+                <input type="tel" name="telefono2" placeholder="Celular" class="form-control" ng-model="cliente.celular">
+            </div>
+            <div class="form-group">
+                <textarea cols="7" name="comentarios" placeholder="Comentarios" class="form-control" ng-model="cliente.comentarios" rows="6"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-info" ng-click="limpiar()">Limpiar</button>
+        </form-->
+	</div>
+</div>

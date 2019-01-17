@@ -1,0 +1,22 @@
+<div ng-controller="MensajesController" id="MensajesController" class="h100">
+	<h1>Mensajes</h1>
+    <div class="mensajes_lista clearfix con_scroll">
+    	<table width="100%">
+        	<thead>
+            	<tr>
+                    <th>Nombre</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            	<tr ng-show="mensajes.length == 0">
+	                <td colspan="2">No hay mensajes para ver</td>
+                </tr>
+                <tr ng-repeat="mensaje in mensajes | orderBy:id:true" ng-click="verMensaje(mensaje.id)">
+                	<td><span class="glyphicon glyphicon-exclamation-sign" ng-show="!mensaje.leido"></span> {{mensaje.nombre}}</td>
+                    <td><span class="glyphicon glyphicon-search"></span></td>
+                </tr>
+            </tbody>
+        </table>
+   	</div>
+</div>

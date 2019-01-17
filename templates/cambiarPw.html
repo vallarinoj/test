@@ -1,0 +1,19 @@
+<div ng-controller="cambiarPwController" id="cambiarPwController" class="h100">
+  <h1>Cambiar su Contraseña</h1>  
+  <div id="login_form">
+  Ingrese su nueva contraseña.<br>
+  Debe tener mayúsculas, minúsculas y números. 6 caracteres mínimo.
+     <form ng-submit="newPw(pw1)">
+            <div class="error">{{form_error}}&nbsp;</div>
+          <div class="form-group" ng-class="{'has-error':conError1}">
+          <input type="password" class="form-control" placeholder="Escriba su contraseña" name="pw1" ng-model="pw1" ng-keyup="revisarPw()"  required /> 
+          </div>
+          <div class="form-group" ng-class="{'has-error':conError2}">
+          <input type="password" class="form-control" placeholder="Repita su contraseña" name="pw2" ng-model="pw2" ng-keyup="revisarPw()" required/>
+          </div>
+    
+          <button type="submit"  class="btn btn-primary">Enviar</button>
+          
+      </form>
+  </div>
+</div>
