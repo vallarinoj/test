@@ -17,8 +17,8 @@
       Pixel Media Publicidad
   </author>
   <preference name="android-minSdkVersion" value="16" />
-  <preference name="android-maxSdkVersion" value="27" />
-  <preference name="android-targetSdkVersion" value="27" />
+  <preference name="android-maxSdkVersion" value="26" />
+  <preference name="android-targetSdkVersion" value="26" />
   <preference name="phonegap-version" value="cli-8.0.0" />
   <plugin name="cordova-plugin-appversion" spec="~1" source="npm" />
   <plugin name="cordova-plugin-crosswalk-webview" spec="~2" source="npm" />
