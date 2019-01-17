@@ -20,5 +20,5 @@
   <plugin name="cordova-plugin-crosswalk-webview" spec="~2" source="npm" />
   <plugin name="cordova-plugin-network-information" spec="~2" source="npm" />
   <plugin name="cordova-plugin-whitelist" spec="~1" source="npm" />
-  <preference name="android-targetSdkVersion" value="26" />
+  <preference name="android-targetSdkVersion" value="27" />
 </widget>
