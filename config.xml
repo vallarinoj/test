@@ -16,6 +16,8 @@
   <author href="https://www.pixelmedia.com.pa" email="webmaster@pixelmedia.com.pa">
       Pixel Media Publicidad
   </author>
+  <platform name="ios" />
+  <platform name="android" />
   <!--icon src="icon.png" platform="ios" />
 <icon src="icon-152.png" platform="ios" width="152" height="152" />
 <icon src="icon-120.png" platform="ios" width="120" height="120" />
